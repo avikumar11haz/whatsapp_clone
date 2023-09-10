@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/colors.dart';
+import 'package:whatsapp_clone/common/custom_button.dart';
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({Key? key}) : super(key: key);
@@ -29,6 +30,11 @@ class LandingScreen extends StatelessWidget {
             style: TextStyle(color: greyColor),
             textAlign: TextAlign.center,),),
             const SizedBox(height: 10),
+            SizedBox(width: size.width * 0.75,
+            child: CustomButton(
+              text: 'AGREE AND CONTINUE',
+              onPressed: (){},
+            ),)
           ],
         ),
       ),
