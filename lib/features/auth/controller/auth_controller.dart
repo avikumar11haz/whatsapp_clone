@@ -10,10 +10,10 @@ final authControllerProvider = Provider((ref) {
   return AuthController(authRepository: authRepository, ref: ref);
 });
 
-  final userDataAuthProvider = FutureProvider((ref) {
-    final authController = ref.watch(authControllerProvider);
-    return authController.getUserData();
-  });
+final userDataAuthProvider = FutureProvider((ref) {
+  final authController = ref.watch(authControllerProvider);
+  return authController.getUserData();
+});
 
 class AuthController {
   final AuthRepository authRepository;
@@ -39,5 +39,9 @@ class AuthController {
       BuildContext context, String name, File? profilePic) {
     authRepository.saveUserDataToFirebase(
         name: name, profilePic: profilePic, ref: ref, context: context);
+  }
+
+  Stream<UserModel> userDataById(String userId) {
+    return authRepository.userData(userId);
   }
 }
