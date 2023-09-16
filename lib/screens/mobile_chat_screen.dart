@@ -31,7 +31,8 @@ class MobileChatScreen extends ConsumerWidget {
                   Text(snapshot.data!.isOnline ? 'online' : 'offline',
                   style: const TextStyle(
                     fontSize: 13,
-                    fontWeight: FontWeight.normal,
+                    fontWeight: FontWeight.normal, //normal work
+
                   ),),
                 ],
               );
