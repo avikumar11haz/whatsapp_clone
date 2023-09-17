@@ -31,8 +31,7 @@ class MobileChatScreen extends ConsumerWidget {
                   Text(snapshot.data!.isOnline ? 'online' : 'offline',
                   style: const TextStyle(
                     fontSize: 13,
-                    fontWeight: FontWeight.normal, //normal work
-
+                    fontWeight: FontWeight.normal,
                   ),),
                 ],
               );
@@ -89,7 +88,7 @@ class MobileChatScreen extends ConsumerWidget {
                   ],
                 ),
               ),
-              hintText: 'Type a message!',
+              hintText: 'Type a message!', // Type a message
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20.0),
                 borderSide: const BorderSide(
