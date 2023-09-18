@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:uuid/uuid.dart';
+import 'package:whatsapp_clone/common/enums/message_enum.dart';
 import 'package:whatsapp_clone/common/utils/utils.dart';
 import 'package:whatsapp_clone/models/chat_contact.dart';
+import 'package:whatsapp_clone/models/message.dart';
 import 'package:whatsapp_clone/models/user_model.dart';
 
 class ChatRepository {
@@ -52,7 +55,18 @@ class ChatRepository {
       required DateTime timeSent,
       required String messageId,
       required String username,
-      required receiverUsername}) async {}
+      required receiverUsername,
+      required MessageEnum messageType}) async {
+    final message = Message(
+      senderId: auth.currentUser!.uid,
+      recieverid: receiverUserId,
+      text: text,
+      type: messageType,
+      timeSent: timeSent,
+      messageId: messageId,
+      isSeen: false,
+    );
+  }
 
   void sendTextMessage({
     required BuildContext context,
@@ -68,8 +82,19 @@ class ChatRepository {
           await firestore.collection('users').doc(receiverUserId).get();
       receiverUserData = UserModel.fromMap(userDataMap.data()!);
 
+      var messageId = const Uuid().v1();
+
       _saveDataToContactsSubcollection(
           senderUser, receiverUserData, text, timeSent, receiverUserId);
+
+      _saveMessageToMessageSubcollection(
+          receiverUserId: receiverUserId,
+          text: text,
+          timeSent: timeSent,
+          messageId: messageId,
+          username: senderUser.name,
+          receiverUsername: receiverUserData.name,
+          messageType: MessageEnum.text);
     } catch (e) {
       showSnackBar(context: context, content: e.toString());
     }
