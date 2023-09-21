@@ -214,7 +214,14 @@ class ChatRepository {
       _saveDataToContactsSubcollection(senderUserData, receiverUserData,
           contactMsg, timeSent, receiverUserId);
 
-          _saveMessageToMessageSubcollection(receiverUserId: receiverUserId, text: imageUrl, timeSent: timeSent, messageId: messageId, username: username, receiverUsername: receiverUsername, messageType: messageType)
+      _saveMessageToMessageSubcollection(
+          receiverUserId: receiverUserId,
+          text: imageUrl,
+          timeSent: timeSent,
+          messageId: messageId,
+          username: senderUserData.name,
+          receiverUsername: receiverUserData.name,
+          messageType: messageEnum);
     } catch (e) {
       showSnackBar(context: context, content: e.toString());
     }
