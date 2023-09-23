@@ -17,7 +17,7 @@ class DisplayTextImageGIF extends StatelessWidget {
         ? Text(
             message,
             style: const TextStyle(
-              fontSize: 16,
+              fontSize: 16, // display
             ),
           )
         : type == MessageEnum.video
