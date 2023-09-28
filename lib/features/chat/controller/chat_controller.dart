@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:whatsapp_clone/common/enums/message_enum.dart';
+import 'package:whatsapp_clone/common/providers/message_reply_provider.dart';
 import 'package:whatsapp_clone/features/auth/controller/auth_controller.dart';
 import 'package:whatsapp_clone/features/chat/repositories/chat_repository.dart';
 import 'package:whatsapp_clone/models/chat_contact.dart';
@@ -32,12 +33,14 @@ class ChatController {
 
   void sendTextMessage(
       BuildContext context, String text, String receiverUserId) {
+    final messageReply = ref.read(messageReplyProvider);
     ref.read(userDataAuthProvider).whenData((value) =>
         chatRepository.sendTextMessage(
             context: context,
             text: text,
             receiverUserId: receiverUserId,
-            senderUser: value!));
+            senderUser: value!,
+            messageReply: messageReply));
   }
 
   void sendFileMessage(
@@ -46,16 +49,16 @@ class ChatController {
     String receiverUserId,
     MessageEnum messageEnum,
   ) {
-    ref
-        .read(userDataAuthProvider)
-        .whenData((value) => chatRepository.sendFileMessage(
-              context: context,
-              file: file,
-              receiverUserId: receiverUserId,
-              senderUserData: value!,
-              messageEnum: messageEnum,
-              ref: ref,
-            ));
+    final messageReply = ref.read(messageReplyProvider);
+    ref.read(userDataAuthProvider).whenData((value) =>
+        chatRepository.sendFileMessage(
+            context: context,
+            file: file,
+            receiverUserId: receiverUserId,
+            senderUserData: value!,
+            messageEnum: messageEnum,
+            ref: ref,
+            messageReply: messageReply));
   }
 
   void sendGIFMessage(
@@ -63,6 +66,7 @@ class ChatController {
     String gifUrl,
     String receiverUserId,
   ) {
+    final messageReply = ref.read(messageReplyProvider);
     int gifUrlPartIndex = gifUrl.lastIndexOf('-') + 1;
     String gifUrlPart = gifUrl.substring(gifUrlPartIndex);
     String newgifUrl = 'https://i.giphy.com/media/$gifUrlPart/200.gif';
@@ -72,6 +76,7 @@ class ChatController {
             context: context,
             gifUrl: newgifUrl,
             receiverUserId: receiverUserId,
-            senderUser: value!));
+            senderUser: value!,
+            messageReply: messageReply));
   }
 }
