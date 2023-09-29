@@ -51,6 +51,7 @@ dependencies:
   path_provider: ^2.1.1
   permission_handler: ^9.2.0
   flutter_sound_record: ^3.3.2
+  swipe_to: ^1.0.2
 
 dev_dependencies:
   flutter_test:
