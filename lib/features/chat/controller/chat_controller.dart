@@ -41,6 +41,7 @@ class ChatController {
             receiverUserId: receiverUserId,
             senderUser: value!,
             messageReply: messageReply));
+    ref.read(messageReplyProvider.state).update((state) => null);
   }
 
   void sendFileMessage(
@@ -59,6 +60,7 @@ class ChatController {
             messageEnum: messageEnum,
             ref: ref,
             messageReply: messageReply));
+    ref.read(messageReplyProvider.state).update((state) => null);
   }
 
   void sendGIFMessage(
@@ -78,5 +80,6 @@ class ChatController {
             receiverUserId: receiverUserId,
             senderUser: value!,
             messageReply: messageReply));
+    ref.read(messageReplyProvider.state).update((state) => null);
   }
 }
