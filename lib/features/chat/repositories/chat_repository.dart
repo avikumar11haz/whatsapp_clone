@@ -169,7 +169,12 @@ class ChatRepository {
       var messageId = const Uuid().v1();
 
       _saveDataToContactsSubcollection(
-          senderUser, receiverUserData, text, timeSent, receiverUserId);
+        senderUser,
+        receiverUserData,
+        text,
+        timeSent,
+        receiverUserId,
+      );
 
       _saveMessageToMessageSubcollection(
         receiverUserId: receiverUserId,
@@ -230,8 +235,13 @@ class ChatRepository {
         default:
           contactMsg = 'GIF';
       }
-      _saveDataToContactsSubcollection(senderUserData, receiverUserData,
-          contactMsg, timeSent, receiverUserId);
+      _saveDataToContactsSubcollection(
+        senderUserData,
+        receiverUserData,
+        contactMsg,
+        timeSent,
+        receiverUserId,
+      );
 
       _saveMessageToMessageSubcollection(
         receiverUserId: receiverUserId,
@@ -268,7 +278,12 @@ class ChatRepository {
       var messageId = const Uuid().v1();
 
       _saveDataToContactsSubcollection(
-          senderUser, receiverUserData, 'GIF', timeSent, receiverUserId);
+        senderUser,
+        receiverUserData,
+        'GIF',
+        timeSent,
+        receiverUserId,
+      );
 
       _saveMessageToMessageSubcollection(
         receiverUserId: receiverUserId,
@@ -282,6 +297,34 @@ class ChatRepository {
         recieverUserName: receiverUserData.name,
         senderUsername: senderUser.name,
       );
+    } catch (e) {
+      showSnackBar(context: context, content: e.toString());
+    }
+  }
+
+  void setChatMessageSeen(
+    BuildContext context,
+    String receiverUserId,
+    String messageId,
+  ) async {
+    try {
+      await firestore
+          .collection('users')
+          .doc(auth.currentUser!.uid)
+          .collection('chats')
+          .doc(receiverUserId)
+          .collection('messages')
+          .doc(messageId)
+          .update({'isSeen': true});
+
+      await firestore
+          .collection('users')
+          .doc(receiverUserId)
+          .collection('chats')
+          .doc(auth.currentUser!.uid)
+          .collection('messages')
+          .doc(messageId)
+          .update({'isSeen': true});
     } catch (e) {
       showSnackBar(context: context, content: e.toString());
     }
