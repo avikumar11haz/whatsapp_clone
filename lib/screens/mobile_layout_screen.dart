@@ -7,6 +7,7 @@ import 'package:whatsapp_clone/common/utils/utils.dart';
 import 'package:whatsapp_clone/features/auth/controller/auth_controller.dart';
 import 'package:whatsapp_clone/features/chat/widgets/contacts_list.dart';
 import 'package:whatsapp_clone/features/select_contacts/screens/select_contacts_screen.dart';
+import 'package:whatsapp_clone/features/status/screens/confirm_status_screen.dart';
 import 'package:whatsapp_clone/features/status/screens/status_contacts_screen.dart';
 
 class MobileLayoutScreen extends ConsumerStatefulWidget {
@@ -111,7 +112,14 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
               Navigator.pushNamed(context, SelectContactsScreen.routeName);
             } else {
               File? pickedImage = await pickImageFromGallery(context);
-              if (pickedImage != null) {}
+              if (pickedImage != null) {
+                // ignore: use_build_context_synchronously
+                Navigator.pushNamed(
+                  context,
+                  ConfirmStatusScreen.routeName,
+                  arguments: pickedImage,
+                );
+              }
             }
           },
           backgroundColor: tabColor,
