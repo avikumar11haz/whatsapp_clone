@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 import 'package:whatsapp_clone/common/repositories/common_firebase_storage_respositories.dart';
 import 'package:whatsapp_clone/common/utils/utils.dart';
+import 'package:whatsapp_clone/features/call/screens/call_screen.dart';
 import 'package:whatsapp_clone/models/call.dart';
 import 'package:whatsapp_clone/models/group.dart' as model;
 
@@ -43,6 +44,18 @@ class CallRepository {
           .collection('call')
           .doc(senderCallData.callerId)
           .set(receiverCallData.toMap());
+
+      // ignore: use_build_context_synchronously
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CallScreen(
+            channelId: senderCallData.callId,
+            call: senderCallData,
+            isGroupChat: false,
+          ),
+        ),
+      );
     } catch (e) {
       showSnackBar(context: context, content: e.toString());
     }
