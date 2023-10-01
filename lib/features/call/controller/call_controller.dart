@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,6 +25,8 @@ class CallController {
     required this.ref,
     required this.auth,
   });
+
+  Stream<DocumentSnapshot> get callStream => callRepository.callStream;
 
   void makeCall(BuildContext context, String receiverName, String receiverUid,
       String receiverProfilePic, bool isGroupChat) {
