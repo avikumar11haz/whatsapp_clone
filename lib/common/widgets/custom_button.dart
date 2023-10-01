@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp_clone/colors.dart';
+import 'package:whatsapp_clone/common/utils/colors.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
-  const CustomButton({Key? key, required this.text, required this.onPressed}) : super(key: key);
+  const CustomButton({Key? key, required this.text, required this.onPressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(onPressed: onPressed,
-        child: Text(text, style: const TextStyle(
+    return ElevatedButton(
+      onPressed: onPressed,
+      child: Text(
+        text,
+        style: const TextStyle(
           color: blackColor,
-        ),),
-    style: ElevatedButton.styleFrom(
-      primary: tabColor,
-      minimumSize: const Size(double.infinity, 50),
-    ),);
+        ),
+      ),
+      style: ElevatedButton.styleFrom(
+        primary: tabColor,
+        minimumSize: const Size(double.infinity, 50),
+      ),
+    );
   }
 }
