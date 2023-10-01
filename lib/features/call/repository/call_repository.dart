@@ -1,16 +1,10 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:uuid/uuid.dart';
-import 'package:whatsapp_clone/common/repositories/common_firebase_storage_respositories.dart';
 import 'package:whatsapp_clone/common/utils/utils.dart';
 import 'package:whatsapp_clone/features/call/screens/call_screen.dart';
 import 'package:whatsapp_clone/models/call.dart';
-import 'package:whatsapp_clone/models/group.dart' as model;
 
 final callRepositoryProvider = Provider(
   (ref) => CallRepository(
@@ -56,6 +50,19 @@ class CallRepository {
           ),
         ),
       );
+    } catch (e) {
+      showSnackBar(context: context, content: e.toString());
+    }
+  }
+
+  void endCall(
+    String callerId,
+    String receiverId,
+    BuildContext context,
+  ) async {
+    try {
+      await firestore.collection('call').doc(callerId).delete();
+      await firestore.collection('call').doc(receiverId).delete();
     } catch (e) {
       showSnackBar(context: context, content: e.toString());
     }

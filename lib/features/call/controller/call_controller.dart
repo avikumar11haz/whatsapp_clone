@@ -57,4 +57,12 @@ class CallController {
       callRepository.makeCall(senderCallData, context, receiverCallData);
     });
   }
+
+  void endCall(
+    String callerId,
+    String receiverId,
+    BuildContext context,
+  ) {
+    callRepository.endCall(callerId, receiverId, context);
+  }
 }
