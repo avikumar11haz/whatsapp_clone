@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:whatsapp_clone/colors.dart';
 import 'package:whatsapp_clone/common/widgets/loader.dart';
 import 'package:whatsapp_clone/features/chat/controller/chat_controller.dart';
-//import 'package:whatsapp_clone/info.dart';
 import 'package:whatsapp_clone/features/chat/screens/mobile_chat_screen.dart';
 import 'package:whatsapp_clone/models/chat_contact.dart';
 import 'package:whatsapp_clone/models/group.dart';
@@ -39,6 +38,7 @@ class ContactsList extends ConsumerWidget {
                                     arguments: {
                                       'name': groupData.name,
                                       'uid': groupData.groupId,
+                                      'isGroupChat': true,
                                     });
                               },
                               child: Padding(
@@ -99,6 +99,7 @@ class ContactsList extends ConsumerWidget {
                                     arguments: {
                                       'name': chatContactData.name,
                                       'uid': chatContactData.contactId,
+                                      'isGroupChat': false,
                                     });
                               },
                               child: Padding(

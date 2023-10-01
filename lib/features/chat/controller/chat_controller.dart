@@ -36,16 +36,27 @@ class ChatController {
     return chatRepository.getChatStream(receiverUserId);
   }
 
+  Stream<List<Message>> groupChatStream(String groupId) {
+    return chatRepository.getGroupChatStream(groupId);
+  }
+
   void sendTextMessage(
-      BuildContext context, String text, String receiverUserId) {
+    BuildContext context,
+    String text,
+    String receiverUserId,
+    bool isGroupChat,
+  ) {
     final messageReply = ref.read(messageReplyProvider);
-    ref.read(userDataAuthProvider).whenData((value) =>
-        chatRepository.sendTextMessage(
+    ref.read(userDataAuthProvider).whenData(
+          (value) => chatRepository.sendTextMessage(
             context: context,
             text: text,
             receiverUserId: receiverUserId,
             senderUser: value!,
-            messageReply: messageReply));
+            messageReply: messageReply,
+            isGroupChat: isGroupChat,
+          ),
+        );
     ref.read(messageReplyProvider.state).update((state) => null);
   }
 
@@ -54,17 +65,21 @@ class ChatController {
     File file,
     String receiverUserId,
     MessageEnum messageEnum,
+    bool isGroupChat,
   ) {
     final messageReply = ref.read(messageReplyProvider);
-    ref.read(userDataAuthProvider).whenData((value) =>
-        chatRepository.sendFileMessage(
+    ref.read(userDataAuthProvider).whenData(
+          (value) => chatRepository.sendFileMessage(
             context: context,
             file: file,
             receiverUserId: receiverUserId,
             senderUserData: value!,
             messageEnum: messageEnum,
             ref: ref,
-            messageReply: messageReply));
+            messageReply: messageReply,
+            isGroupChat: isGroupChat,
+          ),
+        );
     ref.read(messageReplyProvider.state).update((state) => null);
   }
 
@@ -72,19 +87,23 @@ class ChatController {
     BuildContext context,
     String gifUrl,
     String receiverUserId,
+    bool isGroupChat,
   ) {
     final messageReply = ref.read(messageReplyProvider);
     int gifUrlPartIndex = gifUrl.lastIndexOf('-') + 1;
     String gifUrlPart = gifUrl.substring(gifUrlPartIndex);
     String newgifUrl = 'https://i.giphy.com/media/$gifUrlPart/200.gif';
 
-    ref.read(userDataAuthProvider).whenData((value) =>
-        chatRepository.sendGIFMessage(
+    ref.read(userDataAuthProvider).whenData(
+          (value) => chatRepository.sendGIFMessage(
             context: context,
             gifUrl: newgifUrl,
             receiverUserId: receiverUserId,
             senderUser: value!,
-            messageReply: messageReply));
+            messageReply: messageReply,
+            isGroupChat: isGroupChat,
+          ),
+        );
     ref.read(messageReplyProvider.state).update((state) => null);
   }
 
