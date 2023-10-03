@@ -149,7 +149,7 @@ class ChatRepository {
     required MessageEnum messageType,
     required MessageReply? messageReply,
     required String senderUsername,
-    required String? recieverUserName,
+    required String? receiverUserName,
     required bool isGroupChat,
   }) async {
     final message = Message(
@@ -165,7 +165,7 @@ class ChatRepository {
           ? ''
           : messageReply.isMe
               ? senderUsername
-              : recieverUserName ?? '',
+              : receiverUserName ?? '',
       repliedMessageType:
           messageReply == null ? MessageEnum.text : messageReply.messageEnum,
     );
@@ -238,7 +238,7 @@ class ChatRepository {
         username: senderUser.name,
         messageType: MessageEnum.text,
         messageReply: messageReply,
-        recieverUserName: receiverUserData?.name,
+        receiverUserName: receiverUserData?.name,
         senderUsername: senderUser.name,
         isGroupChat: isGroupChat,
       );
@@ -309,7 +309,7 @@ class ChatRepository {
         username: senderUserData.name,
         messageType: messageEnum,
         messageReply: messageReply,
-        recieverUserName: receiverUserData?.name,
+        receiverUserName: receiverUserData?.name,
         senderUsername: senderUserData.name,
         isGroupChat: isGroupChat,
       );
@@ -355,7 +355,7 @@ class ChatRepository {
         username: senderUser.name,
         messageType: MessageEnum.gif,
         messageReply: messageReply,
-        recieverUserName: receiverUserData?.name,
+        receiverUserName: receiverUserData?.name,
         senderUsername: senderUser.name,
         isGroupChat: isGroupChat,
       );

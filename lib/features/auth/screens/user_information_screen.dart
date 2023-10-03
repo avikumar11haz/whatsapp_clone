@@ -58,6 +58,7 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
                         )
                       : CircleAvatar(
                           backgroundImage: FileImage(image!),
+                          radius: 64,
                         ),
                   Positioned(
                     bottom: -10,
@@ -80,7 +81,8 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
                       ),
                     ),
                   ),
-                  IconButton(onPressed: storeUserData, icon: const Icon(Icons.done))
+                  IconButton(
+                      onPressed: storeUserData, icon: const Icon(Icons.done))
                 ],
               )
             ],
