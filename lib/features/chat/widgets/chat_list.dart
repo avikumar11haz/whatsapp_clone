@@ -33,6 +33,7 @@ class _ChatListState extends ConsumerState<ChatList> {
     messageController.dispose();
   }
 
+  // onMessageSwipe
   void onMessageSwipe(
     String message,
     bool isMe,
