@@ -58,6 +58,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
         );
   }
 
+  //selectImage
   void selectImage() async {
     File? image = await pickImageFromGallery(context);
     if (image != null) {
@@ -84,6 +85,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
     }
   }
 
+  // hideEmojiContainer
   void hideEmojiContainer() {
     setState(() {
       isShowEmojiContainer = false;
