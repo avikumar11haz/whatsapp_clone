@@ -318,6 +318,7 @@ class ChatRepository {
     }
   }
 
+  // send gif message
   void sendGIFMessage({
     required BuildContext context,
     required String gifUrl,

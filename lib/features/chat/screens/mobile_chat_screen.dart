@@ -23,6 +23,7 @@ class MobileChatScreen extends ConsumerWidget {
     required this.profilePic,
   }) : super(key: key);
 
+  // make call
   void makeCall(WidgetRef ref, BuildContext context) {
     ref.read(callControllerProvider).makeCall(
           context,
