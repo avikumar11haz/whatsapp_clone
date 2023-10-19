@@ -66,6 +66,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
     }
   }
 
+  // selct video
   void selectVideo() async {
     File? video = await pickVideoFromGallery(context);
     if (video != null) {
